@@ -1,0 +1,132 @@
+#include <stdio.h>
+#include <conio.h>
+#include <iostream>
+
+const int ATA_IDENTITY = 0xEC;
+const int ATAPI_IDENTITY = 0xA1;
+
+const int DRIVE_REG[2] = {0x1F0, 0x170};
+const int HEAD_REG[2] = {0x1F6, 0x176};
+const int STATUS_REG[2] = {0x1F7, 0x177};
+const int ALT_STATUS_REG[2] = {0x3F6, 0x3F7};
+
+unsigned short data[256];
+
+void waitUntilNotBusy(int channel) {
+    while (_inp(ALT_STATUS_REG[channel]) & 0x80) { }  // Ожидание, пока установлен бит BSY
+}
+
+bool isDeviceReady(int channel) {
+    for (int i = 0; i < 100; i++) {
+        unsigned char state = _inp(ALT_STATUS_REG[channel]);
+        if (state & 0x40) return true;  // Проверка бита DRDY
+    }
+    return false;
+}
+
+bool requestDeviceInfo(int device, int channel) {
+    const int commands[2] = {ATAPI_IDENTITY, ATA_IDENTITY};
+
+    for (int i = 0; i < 2; i++) {
+        waitUntilNotBusy(channel);
+
+        unsigned char driveHead = (device << 4) | (7 << 5);
+        _outp(HEAD_REG[channel], driveHead);
+
+        if (!isDeviceReady(channel)) {
+            return false;
+        }
+
+        _outp(STATUS_REG[channel], commands[i]);
+        waitUntilNotBusy(channel);
+
+        unsigned char state = _inp(STATUS_REG[channel]);
+
+        if (!(state & (1 << 3))) {
+            if (i == 1) {
+                return false;
+            }
+            continue;
+        } else {
+            break;
+        }
+    }
+
+    for (int i = 0; i < 256; i++) {
+        data[i] = _inpw(DRIVE_REG[channel]);
+    }
+
+    printf("Устройство успешно идентифицировано.\n");
+    return true;
+}
+
+void displayDeviceInfo() {
+    printf("\nНаименование модели устройства: ");
+    for (int i = 27; i <= 46; i++) {
+        printf("%c%c", data[i] >> 8, data[i] & 0xFF);
+    }
+
+    printf("\nСерийный номер: ");
+    for (int i = 10; i <= 19; i++) {
+        printf("%c%c", data[i] >> 8, data[i] & 0xFF);
+    }
+
+    printf("\nВерсия прошивки: ");
+    for (int i = 23; i <= 26; i++) {
+        printf("%c%c", data[i] >> 8, data[i] & 0xFF);
+    }
+
+    printf("\nТип обмена данными: ");
+    if (data[0] & (1 << 15)) {
+        printf("ATAPI\n");
+    } else {
+        printf("ATA\n");
+    }
+
+    if (!(data[0] & (1 << 15))) {
+        printf("Размер: %.2lf ГБ\n", (double)((unsigned long)data[60] | ((unsigned long)data[61] << 16)) * 512 / (1024 * 1024 * 1024));
+    }
+
+    printf("\n\n - PIO:");
+    if (data[64] & 1) printf(" PIO 3,");
+    if (data[64] & 2) printf(" PIO 4");
+
+    printf("\n - Multiword DMA:");
+    if (data[63] & 1) printf(" MWDMA 0,");
+    if (data[63] & 2) printf(" MWDMA 1,");
+    if (data[63] & 4) printf(" MWDMA 2");
+
+    printf("\n - Ultra DMA:");
+    if (data[88] & 1) printf(" UDMA Mode 0,");
+    if (data[88] & (1 << 1)) printf(" UDMA Mode 1,");
+    if (data[88] & (1 << 2)) printf(" UDMA Mode 2,");
+    if (data[88] & (1 << 3)) printf(" UDMA Mode 3,");
+    if (data[88] & (1 << 4)) printf(" UDMA Mode 4,");
+    if (data[88] & (1 << 5)) printf(" UDMA Mode 5");
+
+    printf("\n\n - Версии ATA:");
+    if (data[80] & (1 << 1)) printf(" ATA 1,");
+    if (data[80] & (1 << 2)) printf(" ATA 2,");
+    if (data[80] & (1 << 3)) printf(" ATA 3,");
+    if (data[80] & (1 << 4)) printf(" ATA 4,");
+    if (data[80] & (1 << 5)) printf(" ATA 5,");
+    if (data[80] & (1 << 6)) printf(" ATA 6,");
+    if (data[80] & (1 << 7)) printf(" ATA 7");
+
+    printf("\n_____________________________________________________________________________\n\n");
+}
+
+int main() {
+    ALLOW_IO_OPERATIONS;
+    setlocale(LC_ALL, "Russian");
+
+    for (int channel = 0; channel < 2; channel++) {
+        for (int device = 0; device < 2; device++) {
+            if (requestDeviceInfo(device, channel)) {
+                printf("\nКанал %d Устройство %d\n", channel, device);
+                displayDeviceInfo();
+            }
+        }
+    }
+    return 0;
+}

@@ -1,0 +1,86 @@
+MIF/HEX Update report for lab4
+Fri Nov 08 19:50:38 2024
+Quartus II Version 9.1 Build 222 10/21/2009 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. MIF/HEX Update Summary
+  3. MIF/HEX Update Processed Files
+  4. MIF/HEX Update Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2009 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++---------------------------------------------------------------+
+; MIF/HEX Update Summary                                        ;
++-----------------------+---------------------------------------+
+; MIF/HEX Update Status ; Successful - Fri Nov 08 19:50:38 2024 ;
+; Revision Name         ; lab4                                  ;
+; Top-level Entity Name ; lab4                                  ;
+; Family                ; Stratix II                            ;
++-----------------------+---------------------------------------+
+
+
++------------------------------------------------------------------+
+; MIF/HEX Update Processed Files                                   ;
++------------------------------------------------------------------+
+; File Name                                                        ;
++------------------------------------------------------------------+
+; C:/Users/zheka/Desktop/ZXC/¡√”»–/third/5 sem/SiFOVM/lab4/ram.hex ;
+; C:/Users/zheka/Desktop/ZXC/¡√”»–/third/5 sem/SiFOVM/lab4/rom.hex ;
++------------------------------------------------------------------+
+
+
++-------------------------+
+; MIF/HEX Update Messages ;
++-------------------------+
+Info: *******************************************************************
+Info: Running Quartus II MIF/HEX Update
+    Info: Version 9.1 Build 222 10/21/2009 SJ Web Edition
+    Info: Processing started: Fri Nov 08 19:50:37 2024
+Info: Command: quartus_cdb lab4 -c lab4 --update_mif
+Warning: Byte addressed memory initialization file "ram.hex" was read in the word-addressed format
+Warning: Width of data items in "ram.hex" is smaller than the memory width. Padding data items to fit in memory. Found 32 warnings, reporting 10 .
+    Warning: Data width of the data at line (1) of memory initialization file "ram.hex" is smaller than that of the memory word. Padding with "0" on the MSB.
+    Warning: Data width of the data at line (2) of memory initialization file "ram.hex" is smaller than that of the memory word. Padding with "0" on the MSB.
+    Warning: Data width of the data at line (3) of memory initialization file "ram.hex" is smaller than that of the memory word. Padding with "0" on the MSB.
+    Warning: Data width of the data at line (4) of memory initialization file "ram.hex" is smaller than that of the memory word. Padding with "0" on the MSB.
+    Warning: Data width of the data at line (5) of memory initialization file "ram.hex" is smaller than that of the memory word. Padding with "0" on the MSB.
+    Warning: Data width of the data at line (6) of memory initialization file "ram.hex" is smaller than that of the memory word. Padding with "0" on the MSB.
+    Warning: Data width of the data at line (7) of memory initialization file "ram.hex" is smaller than that of the memory word. Padding with "0" on the MSB.
+    Warning: Data width of the data at line (8) of memory initialization file "ram.hex" is smaller than that of the memory word. Padding with "0" on the MSB.
+    Warning: Data width of the data at line (9) of memory initialization file "ram.hex" is smaller than that of the memory word. Padding with "0" on the MSB.
+    Warning: Data width of the data at line (10) of memory initialization file "ram.hex" is smaller than that of the memory word. Padding with "0" on the MSB.
+Critical Warning: Memory depth (64) in the design file differs from memory depth (32) in the Memory Initialization File "ram.hex" -- setting initial value for remaining addresses to 0
+Critical Warning: Memory depth (64) in the design file differs from memory depth (32) in the Memory Initialization File "rom.hex" -- setting initial value for remaining addresses to 0
+Info: Processed the following Memory Initialization File(s)
+    Info: Processed Memory Initialization File C:/Users/zheka/Desktop/ZXC/¡√”»–/third/5 sem/SiFOVM/lab4/ram.hex
+    Info: Processed Memory Initialization File C:/Users/zheka/Desktop/ZXC/¡√”»–/third/5 sem/SiFOVM/lab4/rom.hex
+Info: Quartus II MIF/HEX Update was successful. 0 errors, 14 warnings
+    Info: Peak virtual memory: 212 megabytes
+    Info: Processing ended: Fri Nov 08 19:50:38 2024
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:00
+
+

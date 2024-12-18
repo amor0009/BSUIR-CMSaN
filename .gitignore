@@ -19,6 +19,8 @@ second year/ОУИСиОИнфБ/
 second year/СхемТ/
 
 *.vs/
+*Debug/
+
 
 *.com
 *.debug
@@ -31,3 +33,5 @@ second year/СхемТ/
 *.exe.list
 *.exe.symbol
 *.exe.~asm
+*.vcxproj
+*.sln
