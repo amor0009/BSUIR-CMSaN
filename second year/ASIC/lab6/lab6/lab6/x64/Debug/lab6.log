@@ -1,0 +1,74 @@
+﻿  lab6.cpp
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(17,5): error C4235: использовано нестандартное расширение: ключевое слово "__asm" данной архитектурой не поддерживается
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(18,9): error C2065: finit: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(19,13): error C2065: esi: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(19,18): error C2065: esi: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(20,9): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "mov"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(20,9): error C2065: mov: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(20,13): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "ebx"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(20,13): error C2065: ebx: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(23,9): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "loop_array"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(24,13): error C2065: fld: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(24,17): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "array_start"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(24,29): error C2065: esi: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(25,13): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "fldz"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(25,13): error C2065: fldz: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(26,13): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "fcompp"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(26,13): error C2065: fcompp: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(27,13): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "fstsw"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(27,13): error C2065: fstsw: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(27,19): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "ax"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(27,19): error C2065: ax: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(28,17): error C2065: ah: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(28,21): error C3688: недопустимый литеральный суффикс "b"; не удалось найти литеральный оператор или шаблон литерального оператора "operator ""b"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(29,13): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "jnz"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(29,13): error C2065: jnz: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(29,17): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "positive_value"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(29,17): error C2065: positive_value: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(33,9): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "negative_value"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(34,13): error C2065: fld: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(34,17): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "array_start"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(34,29): error C2065: esi: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(35,13): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "fmul"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(35,13): error C2065: fmul: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(35,18): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "array_start"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(35,30): error C2065: esi: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(36,13): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "jmp"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(36,13): error C2065: jmp: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(36,17): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "loop_array_result"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(36,17): error C2065: loop_array_result: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(38,9): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "positive_value"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(39,13): error C2065: fld: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(39,17): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "array_start"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(39,29): error C2065: esi: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(40,13): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "fmul"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(40,13): error C2065: fmul: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(40,18): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "array_start"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(40,30): error C2065: esi: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(41,13): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "fmul"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(41,13): error C2065: fmul: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(41,18): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "array_start"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(41,30): error C2065: esi: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(45,9): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "loop_array_result"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(46,13): error C2065: fstp: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(46,18): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "array_result"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(46,31): error C2065: esi: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(47,13): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "add"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(47,13): error C2065: add: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(47,17): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "esi"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(47,17): error C2065: esi: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(48,13): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "dec"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(48,13): error C2065: dec: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(48,17): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "ebx"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(48,17): error C2065: ebx: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(49,13): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "cmp"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(49,13): error C2065: cmp: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(49,17): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "ebx"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(49,17): error C2065: ebx: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(50,13): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "jne"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(50,13): error C2065: jne: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(50,17): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "loop_array"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(50,17): error C2065: loop_array: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(52,9): error C2146: синтаксическая ошибка: отсутствие ";" перед идентификатором "fwait"
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(52,9): error C2065: fwait: необъявленный идентификатор
+C:\Users\zheka\Desktop\ZXC\БГУИР\Второй курс\Ассемблер\Лаба6\lab6\lab6\lab6.cpp(53,5): error C2143: синтаксическая ошибка: отсутствие ";" перед "}"
