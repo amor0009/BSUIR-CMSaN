@@ -17,3 +17,13 @@ first year/Физика/
 
 second year/ОУИСиОИнфБ/
 second year/СхемТ/
+
+*/.vs/
+
+*.com
+*.debug
+*.list
+*.symbol
+*.~asm
+*.com_BKP24736
+*.obj
