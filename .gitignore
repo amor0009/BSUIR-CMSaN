@@ -18,7 +18,7 @@ first year/Физика/
 second year/ОУИСиОИнфБ/
 second year/СхемТ/
 
-*/.vs/
+*.vs/
 
 *.com
 *.debug
@@ -27,3 +27,7 @@ second year/СхемТ/
 *.~asm
 *.com_BKP24736
 *.obj
+*.exe.debug
+*.exe.list
+*.exe.symbol
+*.exe.~asm
