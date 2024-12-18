@@ -1,0 +1,5 @@
+﻿  functions.cpp
+C:\Users\zheka\Desktop\ZXC\БГУИР\ОАиП\Лабы\2 сем\Лабораторная работа №1\lab1.6\lab1.6\functions.cpp(85,21): warning C4133: функция: несовместимые типы - из "char [7]" в "FILE *"
+C:\Users\zheka\Desktop\ZXC\БГУИР\ОАиП\Лабы\2 сем\Лабораторная работа №1\lab1.6\lab1.6\functions.cpp(107,20): warning C4133: функция: несовместимые типы - из "char [7]" в "FILE *"
+C:\Users\zheka\Desktop\ZXC\БГУИР\ОАиП\Лабы\2 сем\Лабораторная работа №1\lab1.6\lab1.6\functions.cpp(166,1): warning C4047: инициализация: "char *" отличается по уровням косвенного обращения от "int"
+  lab1.6.vcxproj -> C:\Users\zheka\Desktop\ZXC\БГУИР\ОАиП\Лабы\2 сем\Лабораторная работа №1\lab1.6\x64\Debug\lab1.6.exe

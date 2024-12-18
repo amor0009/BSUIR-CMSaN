@@ -1,0 +1,11 @@
+﻿  functions.cpp
+C:\Users\zheka\Desktop\ZXC\БГУИР\ОАиП\Лабы\2 сем\Лабораторная работа №1\lab1.6.test\lab1.6.test\functions.cpp(11,5): warning C4013: gets: нет определения; предполагается "extern" с возвратом типа "int"
+  lab1.6.test.cpp
+C:\Users\zheka\Desktop\ZXC\БГУИР\ОАиП\Лабы\2 сем\Лабораторная работа №1\lab1.6.test\lab1.6.test\functions.cpp(11,5): warning C4013: gets: нет определения; предполагается "extern" с возвратом типа "int"
+  Создание кода...
+lab1.6.test.obj : error LNK2005: createFile уже определен в functions.obj
+lab1.6.test.obj : error LNK2005: fillDictionary уже определен в functions.obj
+lab1.6.test.obj : error LNK2005: fillFile уже определен в functions.obj
+lab1.6.test.obj : error LNK2005: numStrInFile уже определен в functions.obj
+lab1.6.test.obj : error LNK2005: parseStr уже определен в functions.obj
+C:\Users\zheka\Desktop\ZXC\БГУИР\ОАиП\Лабы\2 сем\Лабораторная работа №1\lab1.6.test\x64\Debug\lab1.6.test.exe : fatal error LNK1169: обнаружен многократно определенный символ - один или более

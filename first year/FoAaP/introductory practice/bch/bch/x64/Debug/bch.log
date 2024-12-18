@@ -1,0 +1,3 @@
+﻿  functions.cpp
+C:\Users\zheka\Desktop\ZXC\БГУИР\ОАиП\Практика\bch\bch\functions.cpp(184,21): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+  bch.vcxproj -> C:\Users\zheka\Desktop\ZXC\БГУИР\ОАиП\Практика\bch\x64\Debug\bch.exe

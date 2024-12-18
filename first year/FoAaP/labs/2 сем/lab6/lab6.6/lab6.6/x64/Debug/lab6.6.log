@@ -1,0 +1,12 @@
+﻿  lab6.6.cpp
+C:\Users\zheka\Desktop\ZXC\БГУИР\ОАиП\Лабы\2 сем\Лабораторная работа №6\lab6.6\lab6.6\lab6.6.cpp(9,12): warning C4133: функция: несовместимые типы - из "LIST **" в "Ring **"
+C:\Users\zheka\Desktop\ZXC\БГУИР\ОАиП\Лабы\2 сем\Лабораторная работа №6\lab6.6\lab6.6\lab6.6.cpp(9,16): warning C4133: функция: несовместимые типы - из "Ring **" в "LIST **"
+  Source.cpp
+C:\Users\zheka\Desktop\ZXC\БГУИР\ОАиП\Лабы\2 сем\Лабораторная работа №6\lab6.6\lab6.6\Source.cpp(5,15): warning C4101: temp: неиспользованная локальная переменная
+C:\Users\zheka\Desktop\ZXC\БГУИР\ОАиП\Лабы\2 сем\Лабораторная работа №6\lab6.6\lab6.6\Source.cpp(130,21): warning C4047: функция: "Ring **" отличается по уровням косвенного обращения от "Ring *"
+C:\Users\zheka\Desktop\ZXC\БГУИР\ОАиП\Лабы\2 сем\Лабораторная работа №6\lab6.6\lab6.6\Source.cpp(130,19): warning C4024: push: различные типы для формального и фактического параметров 1
+C:\Users\zheka\Desktop\ZXC\БГУИР\ОАиП\Лабы\2 сем\Лабораторная работа №6\lab6.6\lab6.6\Source.cpp(130,23): warning C4020: push: слишком много фактических параметров
+C:\Users\zheka\Desktop\ZXC\БГУИР\ОАиП\Лабы\2 сем\Лабораторная работа №6\lab6.6\lab6.6\Source.cpp(133,28): warning C4047: функция: "LIST **" отличается по уровням косвенного обращения от "LIST *"
+C:\Users\zheka\Desktop\ZXC\БГУИР\ОАиП\Лабы\2 сем\Лабораторная работа №6\lab6.6\lab6.6\Source.cpp(133,24): warning C4024: pop_after: различные типы для формального и фактического параметров 1
+  Создание кода...
+  lab6.6.vcxproj -> C:\Users\zheka\Desktop\ZXC\БГУИР\ОАиП\Лабы\2 сем\Лабораторная работа №6\lab6.6\x64\Debug\lab6.6.exe
