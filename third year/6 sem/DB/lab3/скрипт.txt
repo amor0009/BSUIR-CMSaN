@@ -1,0 +1,1039 @@
+ПРИЛОЖЕНИЕ А
+   (обязательное)
+    SQL скрипт
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 15.6
+-- Dumped by pg_dump version 15.6
+
+-- Started on 2025-02-19 13:23:10 +03
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 4 (class 2615 OID 2200)
+-- Name: public; Type: SCHEMA; Schema: -; Owner: pg_database_owner
+--
+
+CREATE SCHEMA public;
+
+
+ALTER SCHEMA public OWNER TO pg_database_owner;
+
+--
+-- TOC entry 3672 (class 0 OID 0)
+-- Dependencies: 4
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: pg_database_owner
+--
+
+COMMENT ON SCHEMA public IS 'standard public schema';
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 228 (class 1259 OID 33231)
+-- Name: auto_supplier; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.auto_supplier (
+    car_id integer NOT NULL,
+    supplier_id integer NOT NULL,
+    detail integer NOT NULL,
+    wear integer NOT NULL,
+    CONSTRAINT auto_supplier_wear_check CHECK (((wear >= 0) AND (wear <= 100)))
+);
+
+
+ALTER TABLE public.auto_supplier OWNER TO postgres;
+
+--
+-- TOC entry 215 (class 1259 OID 33131)
+-- Name: car; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.car (
+    id integer NOT NULL,
+    vin character varying(17) NOT NULL,
+    brand character varying NOT NULL,
+    model character varying NOT NULL,
+    year integer NOT NULL,
+    price integer NOT NULL
+);
+
+
+ALTER TABLE public.car OWNER TO postgres;
+
+--
+-- TOC entry 214 (class 1259 OID 33130)
+-- Name: car_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.car_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.car_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3673 (class 0 OID 0)
+-- Dependencies: 214
+-- Name: car_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.car_id_seq OWNED BY public.car.id;
+
+
+--
+-- TOC entry 223 (class 1259 OID 33202)
+-- Name: client; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.client (
+    id integer NOT NULL,
+    name character varying NOT NULL,
+    email character varying NOT NULL,
+    rating integer NOT NULL,
+    orders_number integer NOT NULL,
+    CONSTRAINT client_orders_number_check CHECK ((orders_number >= 0)),
+    CONSTRAINT client_rating_check CHECK (((rating >= 1) AND (rating <= 5)))
+);
+
+
+ALTER TABLE public.client OWNER TO postgres;
+
+--
+-- TOC entry 222 (class 1259 OID 33201)
+-- Name: client_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.client_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.client_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3674 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: client_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.client_id_seq OWNED BY public.client.id;
+
+
+--
+-- TOC entry 221 (class 1259 OID 33192)
+-- Name: orders; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.orders (
+    id integer NOT NULL,
+    price integer NOT NULL,
+    date date NOT NULL,
+    condition character varying NOT NULL,
+    credit boolean NOT NULL,
+    client_id integer,
+    saler_id integer,
+    car_id integer,
+    CONSTRAINT orders_price_check CHECK ((price >= 0))
+);
+
+
+ALTER TABLE public.orders OWNER TO postgres;
+
+--
+-- TOC entry 220 (class 1259 OID 33191)
+-- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.orders_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.orders_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3675 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.orders_id_seq OWNED BY public.orders.id;
+
+
+--
+-- TOC entry 227 (class 1259 OID 33222)
+-- Name: payment; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.payment (
+    id integer NOT NULL,
+    date date NOT NULL,
+    status boolean NOT NULL,
+    sum integer NOT NULL,
+    process character varying NOT NULL,
+    orders_id integer,
+    CONSTRAINT payment_sum_check CHECK ((sum >= 0))
+);
+
+
+ALTER TABLE public.payment OWNER TO postgres;
+
+--
+-- TOC entry 226 (class 1259 OID 33221)
+-- Name: payment_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.payment_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.payment_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3676 (class 0 OID 0)
+-- Dependencies: 226
+-- Name: payment_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.payment_id_seq OWNED BY public.payment.id;
+
+
+--
+-- TOC entry 225 (class 1259 OID 33213)
+-- Name: saler; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.saler (
+    id integer NOT NULL,
+    name character varying NOT NULL,
+    email character varying NOT NULL,
+    telephone character varying(15) NOT NULL,
+    schedule integer NOT NULL
+);
+
+
+ALTER TABLE public.saler OWNER TO postgres;
+
+--
+-- TOC entry 224 (class 1259 OID 33212)
+-- Name: saler_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.saler_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.saler_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3677 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: saler_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.saler_id_seq OWNED BY public.saler.id;
+
+
+--
+-- TOC entry 219 (class 1259 OID 33183)
+-- Name: service_schedule; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.service_schedule (
+    id integer NOT NULL,
+    date date NOT NULL,
+    status boolean NOT NULL,
+    order_id integer NOT NULL,
+    type_of_work character varying NOT NULL,
+    id_car integer NOT NULL
+);
+
+
+ALTER TABLE public.service_schedule OWNER TO postgres;
+
+--
+-- TOC entry 218 (class 1259 OID 33182)
+-- Name: service_schedule_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.service_schedule_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.service_schedule_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3678 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: service_schedule_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.service_schedule_id_seq OWNED BY public.service_schedule.id;
+
+
+--
+-- TOC entry 217 (class 1259 OID 33174)
+-- Name: supplier; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.supplier (
+    id integer NOT NULL,
+    name character varying NOT NULL,
+    telephone_number character varying(15) NOT NULL,
+    email character varying NOT NULL,
+    country character varying NOT NULL,
+    city character varying NOT NULL
+);
+
+
+ALTER TABLE public.supplier OWNER TO postgres;
+
+--
+-- TOC entry 216 (class 1259 OID 33173)
+-- Name: supplier_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.supplier_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.supplier_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3679 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: supplier_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.supplier_id_seq OWNED BY public.supplier.id;
+
+
+--
+-- TOC entry 3473 (class 2604 OID 33134)
+-- Name: car id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.car ALTER COLUMN id SET DEFAULT nextval('public.car_id_seq'::regclass);
+
+
+--
+-- TOC entry 3477 (class 2604 OID 33205)
+-- Name: client id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.client ALTER COLUMN id SET DEFAULT nextval('public.client_id_seq'::regclass);
+
+
+--
+-- TOC entry 3476 (class 2604 OID 33195)
+-- Name: orders id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.orders ALTER COLUMN id SET DEFAULT nextval('public.orders_id_seq'::regclass);
+
+
+--
+-- TOC entry 3479 (class 2604 OID 33225)
+-- Name: payment id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.payment ALTER COLUMN id SET DEFAULT nextval('public.payment_id_seq'::regclass);
+
+
+--
+-- TOC entry 3478 (class 2604 OID 33216)
+-- Name: saler id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.saler ALTER COLUMN id SET DEFAULT nextval('public.saler_id_seq'::regclass);
+
+
+--
+-- TOC entry 3475 (class 2604 OID 33186)
+-- Name: service_schedule id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.service_schedule ALTER COLUMN id SET DEFAULT nextval('public.service_schedule_id_seq'::regclass);
+
+
+--
+-- TOC entry 3474 (class 2604 OID 33177)
+-- Name: supplier id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.supplier ALTER COLUMN id SET DEFAULT nextval('public.supplier_id_seq'::regclass);
+
+
+--
+-- TOC entry 3666 (class 0 OID 33231)
+-- Dependencies: 228
+-- Data for Name: auto_supplier; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.auto_supplier (car_id, supplier_id, detail, wear) FROM stdin;
+1	1	101	10
+2	2	102	20
+3	3	103	30
+4	4	104	40
+5	5	105	50
+6	6	106	60
+7	7	107	70
+8	8	108	80
+9	9	109	90
+10	10	110	10
+11	11	111	20
+12	12	112	30
+13	13	113	40
+14	14	114	50
+15	15	115	60
+16	16	116	70
+17	17	117	80
+18	18	118	90
+19	19	119	10
+20	20	120	20
+21	21	121	30
+22	22	122	40
+23	23	123	50
+24	24	124	60
+25	25	125	70
+26	26	126	80
+27	27	127	90
+28	28	128	10
+29	29	129	20
+30	30	130	30
+\.
+
+
+--
+-- TOC entry 3653 (class 0 OID 33131)
+-- Dependencies: 215
+-- Data for Name: car; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.car (id, vin, brand, model, year, price) FROM stdin;
+1	VIN00000000000001	Toyota	Corolla	2010	8000
+2	VIN00000000000002	Honda	Civic	2011	8500
+3	VIN00000000000003	Ford	Focus	2012	7500
+4	VIN00000000000004	Nissan	Altima	2013	9000
+5	VIN00000000000005	Chevrolet	Cruze	2014	8500
+6	VIN00000000000006	Hyundai	Elantra	2010	7800
+7	VIN00000000000007	Kia	Rio	2011	8000
+8	VIN00000000000008	Volkswagen	Golf	2012	9500
+9	VIN00000000000009	Mazda	Mazda3	2013	8700
+10	VIN00000000000010	Subaru	Impreza	2014	9200
+11	VIN00000000000011	Audi	A3	2015	15000
+12	VIN00000000000012	BMW	3 Series	2016	20000
+13	VIN00000000000013	Mercedes	C-Class	2017	22000
+14	VIN00000000000014	Lexus	IS	2015	21000
+15	VIN00000000000015	Infiniti	Q50	2016	19000
+16	VIN00000000000016	Acura	TLX	2017	23000
+17	VIN00000000000017	Volvo	S60	2018	24000
+18	VIN00000000000018	Cadillac	ATS	2014	18000
+19	VIN00000000000019	Jaguar	XE	2015	25000
+20	VIN00000000000020	Alfa Romeo	Giulia	2016	26000
+21	VIN00000000000021	Ford	Fusion	2013	8000
+22	VIN00000000000022	Honda	Accord	2012	8500
+23	VIN00000000000023	Toyota	Camry	2011	9000
+24	VIN00000000000024	Nissan	Sentra	2010	7500
+25	VIN00000000000025	Chevrolet	Malibu	2018	12000
+26	VIN00000000000026	Hyundai	Sonata	2017	11000
+27	VIN00000000000027	Kia	Optima	2016	10500
+28	VIN00000000000028	Volkswagen	Passat	2015	11500
+29	VIN00000000000029	Mazda	Mazda6	2014	9800
+30	VIN00000000000030	Subaru	Legacy	2013	9500
+\.
+
+
+--
+-- TOC entry 3661 (class 0 OID 33202)
+-- Dependencies: 223
+-- Data for Name: client; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.client (id, name, email, rating, orders_number) FROM stdin;
+1	Александр Смирнов	asmirnov@example.com	5	2
+2	Мария Иванова	m.ivanova@example.com	4	1
+3	Сергей Кузнецов	skuznetsov@example.com	3	1
+4	Наталья Попова	npopova@example.com	4	2
+5	Дмитрий Соколов	d.sokolov@example.com	5	3
+6	Елена Лебедева	elebedeva@example.com	4	2
+7	Владимир Морозов	vmorozov@example.com	3	1
+8	Ольга Новикова	onovikova@example.com	5	3
+9	Игорь Федоров	ifedorov@example.com	4	2
+10	Анна Волкова	avolkova@example.com	5	1
+11	Михаил Михайлов	mmihaylov@example.com	4	2
+12	Юлия Максимова	umaksimova@example.com	3	1
+13	Андрей Васильев	avasilev@example.com	5	2
+14	Екатерина Романова	eromanova@example.com	4	1
+15	Константин Никифоров	k.nikiforov@example.com	3	3
+16	Светлана Орлова	sorlova@example.com	5	2
+17	Павел Александров	palexandrov@example.com	4	1
+18	Татьяна Дмитриева	tdmitrieva@example.com	5	3
+19	Виктор Ефимов	vefimov@example.com	4	2
+20	Ирина Степанова	istepanova@example.com	3	1
+21	Роман Захаров	rzaharov@example.com	5	2
+22	Валерия Белова	vbelova@example.com	4	1
+23	Николай Соловьев	nsoloviev@example.com	3	3
+24	Людмила Громова	lgromova@example.com	5	2
+25	Григорий Крылов	gkrylov@example.com	4	1
+26	Оксана Петрова	opetrova@example.com	5	3
+27	Евгений Карпов	ekarpov@example.com	4	2
+28	Вера Матвеева	vmatveeva@example.com	3	1
+29	Сергей Фролов	sfrolov@example.com	5	2
+30	Марина Захарова	mzaharova@example.com	4	3
+\.
+
+
+--
+-- TOC entry 3659 (class 0 OID 33192)
+-- Dependencies: 221
+-- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.orders (id, price, date, condition, credit, client_id, saler_id, car_id) FROM stdin;
+1	15200	2021-03-01	новый	f	1	1	1
+2	13800	2021-03-02	подержанный	t	2	2	2
+3	16750	2021-03-03	новый	f	3	3	3
+4	12400	2021-03-04	подержанный	t	4	4	4
+5	15800	2021-03-05	новый	f	5	5	5
+6	13100	2021-03-06	подержанный	t	6	6	6
+7	16200	2021-03-07	новый	f	7	7	7
+8	14500	2021-03-08	подержанный	t	8	8	8
+9	17500	2021-03-09	новый	f	9	9	9
+10	13900	2021-03-10	подержанный	t	10	10	10
+11	15300	2021-03-11	новый	f	11	11	11
+12	14000	2021-03-12	подержанный	t	12	12	12
+13	16000	2021-03-13	новый	f	13	13	13
+14	14200	2021-03-14	подержанный	t	14	14	14
+15	15700	2021-03-15	новый	f	15	15	15
+16	13600	2021-03-16	подержанный	t	16	16	16
+17	16500	2021-03-17	новый	f	17	17	17
+18	14100	2021-03-18	подержанный	t	18	18	18
+19	16900	2021-03-19	новый	f	19	19	19
+20	13500	2021-03-20	подержанный	t	20	20	20
+21	15400	2021-03-21	новый	f	21	21	21
+22	13200	2021-03-22	подержанный	t	22	22	22
+23	16800	2021-03-23	новый	f	23	23	23
+24	14300	2021-03-24	подержанный	t	24	24	24
+25	15600	2021-03-25	новый	f	25	25	25
+26	13800	2021-03-26	подержанный	t	26	26	26
+27	16300	2021-03-27	новый	f	27	27	27
+28	13700	2021-03-28	подержанный	t	28	28	28
+29	17000	2021-03-29	новый	f	29	29	29
+30	14000	2021-03-30	подержанный	t	30	30	30
+\.
+
+
+--
+-- TOC entry 3665 (class 0 OID 33222)
+-- Dependencies: 227
+-- Data for Name: payment; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.payment (id, date, status, sum, process, orders_id) FROM stdin;
+1	2020-04-01	t	8100	Наличные	1
+2	2020-04-02	f	8200	Карта	2
+3	2020-04-03	t	8300	Наличные	3
+4	2020-04-04	f	8400	Карта	4
+5	2020-04-05	t	8500	Наличные	5
+6	2020-04-06	f	8600	Карта	6
+7	2020-04-07	t	8700	Наличные	7
+8	2020-04-08	f	8800	Карта	8
+9	2020-04-09	t	8900	Наличные	9
+10	2020-04-10	f	9000	Карта	10
+11	2020-04-11	t	9100	Наличные	11
+12	2020-04-12	f	9200	Карта	12
+13	2020-04-13	t	9300	Наличные	13
+14	2020-04-14	f	9400	Карта	14
+15	2020-04-15	t	9500	Наличные	15
+16	2020-04-16	f	9600	Карта	16
+17	2020-04-17	t	9700	Наличные	17
+18	2020-04-18	f	9800	Карта	18
+19	2020-04-19	t	9900	Наличные	19
+20	2020-04-20	f	10000	Карта	20
+21	2020-04-21	t	10100	Наличные	21
+22	2020-04-22	f	10200	Карта	22
+23	2020-04-23	t	10300	Наличные	23
+24	2020-04-24	f	10400	Карта	24
+25	2020-04-25	t	10500	Наличные	25
+26	2020-04-26	f	10600	Карта	26
+27	2020-04-27	t	10700	Наличные	27
+28	2020-04-28	f	10800	Карта	28
+29	2020-04-29	t	10900	Наличные	29
+30	2020-04-30	f	11000	Карта	30
+31	2020-04-01	t	8100	Наличные	1
+32	2020-04-02	f	8200	Карта	2
+33	2020-04-03	t	8300	Наличные	3
+34	2020-04-04	f	8400	Карта	4
+35	2020-04-05	t	8500	Наличные	5
+36	2020-04-06	f	8600	Карта	6
+37	2020-04-07	t	8700	Наличные	7
+38	2020-04-08	f	8800	Карта	8
+39	2020-04-09	t	8900	Наличные	9
+40	2020-04-10	f	9000	Карта	10
+41	2020-04-11	t	9100	Наличные	11
+42	2020-04-12	f	9200	Карта	12
+43	2020-04-13	t	9300	Наличные	13
+44	2020-04-14	f	9400	Карта	14
+45	2020-04-15	t	9500	Наличные	15
+46	2020-04-16	f	9600	Карта	16
+47	2020-04-17	t	9700	Наличные	17
+48	2020-04-18	f	9800	Карта	18
+49	2020-04-19	t	9900	Наличные	19
+50	2020-04-20	f	10000	Карта	20
+51	2020-04-21	t	10100	Наличные	21
+52	2020-04-22	f	10200	Карта	22
+53	2020-04-23	t	10300	Наличные	23
+54	2020-04-24	f	10400	Карта	24
+55	2020-04-25	t	10500	Наличные	25
+56	2020-04-26	f	10600	Карта	26
+57	2020-04-27	t	10700	Наличные	27
+58	2020-04-28	f	10800	Карта	28
+59	2020-04-29	t	10900	Наличные	29
+60	2020-04-30	f	11000	Карта	30
+\.
+
+
+--
+-- TOC entry 3663 (class 0 OID 33213)
+-- Dependencies: 225
+-- Data for Name: saler; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.saler (id, name, email, telephone, schedule) FROM stdin;
+1	Александр Иванов	a.ivanov@example.com	495-123-4501	1
+2	Мария Смирнова	m.smirnova@example.com	495-123-4502	2
+3	Сергей Кузнецов	s.kuznetsov@example.com	495-123-4503	3
+4	Елена Попова	e.popova@example.com	495-123-4504	4
+5	Дмитрий Соколов	d.sokolov@example.com	495-123-4505	5
+6	Ольга Лебедева	o.lebedeva@example.com	495-123-4506	6
+7	Владимир Морозов	v.morozov@example.com	495-123-4507	7
+8	Анна Новикова	a.novikova@example.com	495-123-4508	8
+9	Игорь Федоров	i.fedorov@example.com	495-123-4509	9
+10	Наталья Волкова	n.volkova@example.com	495-123-4510	10
+11	Михаил Михайлов	m.mikhailov@example.com	495-123-4511	11
+12	Юлия Максимова	y.maksimova@example.com	495-123-4512	12
+13	Андрей Васильев	a.vasiliev@example.com	495-123-4513	13
+14	Екатерина Романова	e.romanova@example.com	495-123-4514	14
+15	Константин Никифоров	k.nikiforov@example.com	495-123-4515	15
+16	Светлана Орлова	s.orlova@example.com	495-123-4516	16
+17	Павел Александров	p.alexandrov@example.com	495-123-4517	17
+18	Татьяна Дмитриева	t.dmitrieva@example.com	495-123-4518	18
+19	Виктор Ефимов	v.efimov@example.com	495-123-4519	19
+20	Ирина Степанова	i.stepanova@example.com	495-123-4520	20
+21	Роман Захаров	r.zaharov@example.com	495-123-4521	21
+22	Валерия Белова	v.belova@example.com	495-123-4522	22
+23	Николай Соловьев	n.soloviev@example.com	495-123-4523	23
+24	Людмила Громова	l.gromova@example.com	495-123-4524	24
+25	Григорий Крылов	g.krylov@example.com	495-123-4525	25
+26	Оксана Петрова	o.petrova@example.com	495-123-4526	26
+27	Евгений Карпов	e.karpov@example.com	495-123-4527	27
+28	Вера Матвеева	v.matveeva@example.com	495-123-4528	28
+29	Сергей Фролов	s.frolov@example.com	495-123-4529	29
+30	Марина Захарова	m.zaharova@example.com	495-123-4530	30
+31	Александр Иванов	a.ivanov@example.com	495-123-4501	1
+32	Мария Смирнова	m.smirnova@example.com	495-123-4502	2
+33	Сергей Кузнецов	s.kuznetsov@example.com	495-123-4503	3
+34	Елена Попова	e.popova@example.com	495-123-4504	4
+35	Дмитрий Соколов	d.sokolov@example.com	495-123-4505	5
+36	Ольга Лебедева	o.lebedeva@example.com	495-123-4506	6
+37	Владимир Морозов	v.morozov@example.com	495-123-4507	7
+38	Анна Новикова	a.novikova@example.com	495-123-4508	8
+39	Игорь Федоров	i.fedorov@example.com	495-123-4509	9
+40	Наталья Волкова	n.volkova@example.com	495-123-4510	10
+41	Михаил Михайлов	m.mikhailov@example.com	495-123-4511	11
+42	Юлия Максимова	y.maksimova@example.com	495-123-4512	12
+43	Андрей Васильев	a.vasiliev@example.com	495-123-4513	13
+44	Екатерина Романова	e.romanova@example.com	495-123-4514	14
+45	Константин Никифоров	k.nikiforov@example.com	495-123-4515	15
+46	Светлана Орлова	s.orlova@example.com	495-123-4516	16
+47	Павел Александров	p.alexandrov@example.com	495-123-4517	17
+48	Татьяна Дмитриева	t.dmitrieva@example.com	495-123-4518	18
+49	Виктор Ефимов	v.efimov@example.com	495-123-4519	19
+50	Ирина Степанова	i.stepanova@example.com	495-123-4520	20
+51	Роман Захаров	r.zaharov@example.com	495-123-4521	21
+52	Валерия Белова	v.belova@example.com	495-123-4522	22
+53	Николай Соловьев	n.soloviev@example.com	495-123-4523	23
+54	Людмила Громова	l.gromova@example.com	495-123-4524	24
+55	Григорий Крылов	g.krylov@example.com	495-123-4525	25
+56	Оксана Петрова	o.petrova@example.com	495-123-4526	26
+57	Евгений Карпов	e.karpov@example.com	495-123-4527	27
+58	Вера Матвеева	v.matveeva@example.com	495-123-4528	28
+59	Сергей Фролов	s.frolov@example.com	495-123-4529	29
+60	Марина Захарова	m.zaharova@example.com	495-123-4530	30
+\.
+
+
+--
+-- TOC entry 3657 (class 0 OID 33183)
+-- Dependencies: 219
+-- Data for Name: service_schedule; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.service_schedule (id, date, status, order_id, type_of_work, id_car) FROM stdin;
+1	2020-03-01	t	1	Замена масла	1
+2	2020-03-02	f	2	Ротация шин	2
+3	2020-03-03	t	3	Проверка тормозов	3
+4	2020-03-04	f	4	Проверка аккумулятора	4
+5	2020-03-05	t	5	Настройка двигателя	5
+6	2020-03-06	f	6	Проверка трансмиссии	6
+7	2020-03-07	t	7	Замена масла	7
+8	2020-03-08	f	8	Ротация шин	8
+9	2020-03-09	t	9	Проверка тормозов	9
+10	2020-03-10	f	10	Проверка аккумулятора	10
+11	2020-03-11	t	11	Настройка двигателя	11
+12	2020-03-12	f	12	Проверка трансмиссии	12
+13	2020-03-13	t	13	Замена масла	13
+14	2020-03-14	f	14	Ротация шин	14
+15	2020-03-15	t	15	Проверка тормозов	15
+16	2020-03-16	f	16	Проверка аккумулятора	16
+17	2020-03-17	t	17	Настройка двигателя	17
+18	2020-03-18	f	18	Проверка трансмиссии	18
+19	2020-03-19	t	19	Замена масла	19
+20	2020-03-20	f	20	Ротация шин	20
+21	2020-03-21	t	21	Проверка тормозов	21
+22	2020-03-22	f	22	Проверка аккумулятора	22
+23	2020-03-23	t	23	Настройка двигателя	23
+24	2020-03-24	f	24	Проверка трансмиссии	24
+25	2020-03-25	t	25	Замена масла	25
+26	2020-03-26	f	26	Ротация шин	26
+27	2020-03-27	t	27	Проверка тормозов	27
+28	2020-03-28	f	28	Проверка аккумулятора	28
+29	2020-03-29	t	29	Настройка двигателя	29
+30	2020-03-30	f	30	Проверка трансмиссии	30
+\.
+
+
+--
+-- TOC entry 3655 (class 0 OID 33174)
+-- Dependencies: 217
+-- Data for Name: supplier; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.supplier (id, name, telephone_number, email, country, city) FROM stdin;
+1	Supplier 1	100-000-0001	supplier1@example.com	USA	New York
+2	Supplier 2	100-000-0002	supplier2@example.com	USA	Los Angeles
+3	Supplier 3	100-000-0003	supplier3@example.com	USA	Chicago
+4	Supplier 4	100-000-0004	supplier4@example.com	USA	Houston
+5	Supplier 5	100-000-0005	supplier5@example.com	USA	Phoenix
+6	Supplier 6	100-000-0006	supplier6@example.com	USA	Philadelphia
+7	Supplier 7	100-000-0007	supplier7@example.com	USA	San Antonio
+8	Supplier 8	100-000-0008	supplier8@example.com	USA	San Diego
+9	Supplier 9	100-000-0009	supplier9@example.com	USA	Dallas
+10	Supplier 10	100-000-0010	supplier10@example.com	USA	San Jose
+11	Supplier 11	100-000-0011	supplier11@example.com	USA	Austin
+12	Supplier 12	100-000-0012	supplier12@example.com	USA	Jacksonville
+13	Supplier 13	100-000-0013	supplier13@example.com	USA	Fort Worth
+14	Supplier 14	100-000-0014	supplier14@example.com	USA	Columbus
+15	Supplier 15	100-000-0015	supplier15@example.com	USA	Charlotte
+16	Supplier 16	100-000-0016	supplier16@example.com	USA	San Francisco
+17	Supplier 17	100-000-0017	supplier17@example.com	USA	Indianapolis
+18	Supplier 18	100-000-0018	supplier18@example.com	USA	Seattle
+19	Supplier 19	100-000-0019	supplier19@example.com	USA	Denver
+20	Supplier 20	100-000-0020	supplier20@example.com	USA	Washington
+21	Supplier 21	100-000-0021	supplier21@example.com	USA	Boston
+22	Supplier 22	100-000-0022	supplier22@example.com	USA	El Paso
+23	Supplier 23	100-000-0023	supplier23@example.com	USA	Nashville
+24	Supplier 24	100-000-0024	supplier24@example.com	USA	Detroit
+25	Supplier 25	100-000-0025	supplier25@example.com	USA	Memphis
+26	Supplier 26	100-000-0026	supplier26@example.com	USA	Portland
+27	Supplier 27	100-000-0027	supplier27@example.com	USA	Oklahoma City
+28	Supplier 28	100-000-0028	supplier28@example.com	USA	Las Vegas
+29	Supplier 29	100-000-0029	supplier29@example.com	USA	Louisville
+30	Supplier 30	100-000-0030	supplier30@example.com	USA	Baltimore
+31	AutoParts Inc.	212-555-0101	contact@autopartsinc.com	USA	New York
+32	Global Auto Supply	310-555-0102	sales@globalautosupply.com	USA	Los Angeles
+33	City Car Components	312-555-0103	info@citycarcomponents.com	USA	Chicago
+34	Houston Motor Parts	713-555-0104	support@houstonmotorparts.com	USA	Houston
+35	Phoenix Auto Service	602-555-0105	service@phoenixautoservice.com	USA	Phoenix
+36	Philadelphia Parts	215-555-0106	contact@philadelphiaparts.com	USA	Philadelphia
+37	San Antonio Auto	210-555-0107	sales@sanantonioauto.com	USA	San Antonio
+38	San Diego Components	619-555-0108	info@sandiegocomponents.com	USA	San Diego
+39	Dallas Car Supplies	214-555-0109	support@dallascarsupplies.com	USA	Dallas
+40	San Jose Motors	408-555-0110	contact@sanjosemotors.com	USA	San Jose
+41	Austin Auto Parts	512-555-0111	info@austinautoparts.com	USA	Austin
+42	Jacksonville Car Parts	904-555-0112	sales@jacksonvillecarparts.com	USA	Jacksonville
+43	Fort Worth Motors	817-555-0113	support@fortworthmotors.com	USA	Fort Worth
+44	Columbus Auto Supply	614-555-0114	contact@columbusautosupply.com	USA	Columbus
+45	Charlotte Car Components	704-555-0115	info@charlottecars.com	USA	Charlotte
+46	San Francisco Auto	415-555-0116	sales@sanfranciscoauto.com	USA	San Francisco
+47	Indianapolis Parts	317-555-0117	support@indianapolisparts.com	USA	Indianapolis
+48	Seattle Motor Supply	206-555-0118	contact@seattlemotors.com	USA	Seattle
+49	Denver Auto Components	303-555-0119	info@denverautocomponents.com	USA	Denver
+50	Washington Car Supply	202-555-0120	sales@washingtoncarsupply.com	USA	Washington
+51	Boston Auto Parts	617-555-0121	support@bostonautoparts.com	USA	Boston
+52	El Paso Motors	915-555-0122	contact@elpasomotors.com	USA	El Paso
+53	Nashville Car Parts	615-555-0123	info@nashvillecarparts.com	USA	Nashville
+54	Detroit Auto Supply	313-555-0124	sales@detroitautosupply.com	USA	Detroit
+55	Memphis Motor Parts	901-555-0125	support@memphismotorparts.com	USA	Memphis
+56	Portland Auto	503-555-0126	contact@portlandauto.com	USA	Portland
+57	Oklahoma City Components	405-555-0127	info@oklahomacitycomponents.com	USA	Oklahoma City
+58	Las Vegas Motors	702-555-0128	sales@lasvegasmotors.com	USA	Las Vegas
+59	Louisville Auto Supply	502-555-0129	support@louisvilleautosupply.com	USA	Louisville
+60	Baltimore Car Parts	410-555-0130	contact@baltimorecarparts.com	USA	Baltimore
+\.
+
+
+--
+-- TOC entry 3680 (class 0 OID 0)
+-- Dependencies: 214
+-- Name: car_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.car_id_seq', 30, true);
+
+
+--
+-- TOC entry 3681 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: client_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.client_id_seq', 30, true);
+
+
+--
+-- TOC entry 3682 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.orders_id_seq', 30, true);
+
+
+--
+-- TOC entry 3683 (class 0 OID 0)
+-- Dependencies: 226
+-- Name: payment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.payment_id_seq', 60, true);
+
+
+--
+-- TOC entry 3684 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: saler_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.saler_id_seq', 60, true);
+
+
+--
+-- TOC entry 3685 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: service_schedule_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.service_schedule_id_seq', 30, true);
+
+
+--
+-- TOC entry 3686 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: supplier_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.supplier_id_seq', 60, true);
+
+
+--
+-- TOC entry 3502 (class 2606 OID 33236)
+-- Name: auto_supplier auto_supplier_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auto_supplier
+    ADD CONSTRAINT auto_supplier_pkey PRIMARY KEY (car_id, supplier_id);
+
+
+--
+-- TOC entry 3486 (class 2606 OID 33138)
+-- Name: car car_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.car
+    ADD CONSTRAINT car_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3488 (class 2606 OID 33140)
+-- Name: car car_vin_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.car
+    ADD CONSTRAINT car_vin_key UNIQUE (vin);
+
+
+--
+-- TOC entry 3496 (class 2606 OID 33211)
+-- Name: client client_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.client
+    ADD CONSTRAINT client_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3494 (class 2606 OID 33200)
+-- Name: orders orders_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT orders_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3500 (class 2606 OID 33230)
+-- Name: payment payment_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.payment
+    ADD CONSTRAINT payment_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3498 (class 2606 OID 33220)
+-- Name: saler saler_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.saler
+    ADD CONSTRAINT saler_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3492 (class 2606 OID 33190)
+-- Name: service_schedule service_schedule_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.service_schedule
+    ADD CONSTRAINT service_schedule_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3490 (class 2606 OID 33181)
+-- Name: supplier supplier_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.supplier
+    ADD CONSTRAINT supplier_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3503 (class 2606 OID 33237)
+-- Name: service_schedule fk_car; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.service_schedule
+    ADD CONSTRAINT fk_car FOREIGN KEY (id_car) REFERENCES public.car(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3504 (class 2606 OID 33252)
+-- Name: orders fk_car; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT fk_car FOREIGN KEY (car_id) REFERENCES public.car(id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 3508 (class 2606 OID 33262)
+-- Name: auto_supplier fk_car; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auto_supplier
+    ADD CONSTRAINT fk_car FOREIGN KEY (car_id) REFERENCES public.car(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3505 (class 2606 OID 33242)
+-- Name: orders fk_client; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT fk_client FOREIGN KEY (client_id) REFERENCES public.client(id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 3507 (class 2606 OID 33257)
+-- Name: payment fk_orders; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.payment
+    ADD CONSTRAINT fk_orders FOREIGN KEY (orders_id) REFERENCES public.orders(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3506 (class 2606 OID 33247)
+-- Name: orders fk_saler; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.orders
+    ADD CONSTRAINT fk_saler FOREIGN KEY (saler_id) REFERENCES public.saler(id) ON DELETE SET NULL;
+
+
+--
+-- TOC entry 3509 (class 2606 OID 33267)
+-- Name: auto_supplier fk_supplier; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.auto_supplier
+    ADD CONSTRAINT fk_supplier FOREIGN KEY (supplier_id) REFERENCES public.supplier(id) ON DELETE CASCADE;
+
+
+-- Completed on 2025-02-19 13:23:10 +03
+
+--
+-- PostgreSQL database dump complete
+--
+
